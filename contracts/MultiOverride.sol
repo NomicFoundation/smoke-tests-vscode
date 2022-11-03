@@ -62,27 +62,28 @@ contract Gamma {
     {}
 }
 
-contract Omega is Alpha, Beta, Gamma {
-    function foo() public {}
+//// Uncomment then fix the override quickfixes
+// contract Omega is Alpha, Beta, Gamma {
+//     function foo() public {}
 
-    function bar() public view virtual {}
+//     function bar() public view virtual {}
 
-    function baz() public virtual override(Alpha, Gamma) {}
+//     function baz() public virtual override(Alpha, Gamma) {}
 
-    function bazbazbazbazbazbazbazbazbazbazbazbazbazbazbazbazbazbaz()
-        public
-        virtual
-        override
-    {}
+//     function bazbazbazbazbazbazbazbazbazbazbazbazbazbazbazbazbazbaz()
+//         public
+//         virtual
+//         override
+//     {}
 
-    function longFunctionName()
-        public
-        virtual
-        returns (string memory outputlong)
-    {}
+//     function longFunctionName()
+//         public
+//         virtual
+//         returns (string memory outputlong)
+//     {}
 
-    modifier anotherMod() {
-        require(25 == 25, "happy");
-        _;
-    }
-}
+//     modifier anotherMod() {
+//         require(25 == 25, "happy");
+//         _;
+//     }
+// }
