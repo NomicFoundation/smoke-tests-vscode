@@ -25,14 +25,17 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.8",
-    // settings: {
-    //   optimizer: {
-    //     enabled: false,
-    //     runs: 1,
-    //   },
-    //   outputSelection: {},
-    // },
+    compilers: [
+      {
+        version: "0.8.8",
+      },
+      {
+        version: "0.8.24",
+      },
+      {
+        version: "0.8.25",
+      },
+    ],
   },
   networks: {
     ropsten: {
