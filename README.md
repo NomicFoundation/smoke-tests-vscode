@@ -22,8 +22,6 @@ Confirm that the contracts build cleanly at the command line:
 npx hardhat compile
 ```
 
-You should see one warning that a contract is too large to deploy to mainnet.
-
 Any new features or bugs that constitute the release should be checked.
 
 To sanity check core functionality:
