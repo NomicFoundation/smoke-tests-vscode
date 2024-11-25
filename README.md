@@ -36,3 +36,14 @@ To sanity check core functionality:
 - Single file rename: open [Rename](./contracts/Rename.sol), rename the `complete` signature and confirm all usages are updated
 - Multi file rename: confirm `npx hardhat compile`, open [Greeter.sol](./contracts/Greeter.sol), rename the `Auth` contract, confirm `npx hardhat compile` still works
 - Imports: check import line errors by opening [404-non-existant.sol](./contracts/imports/404-non-existant.sol) and uncommenting the import line, a 404 error should be reported inline. Add the comment back and check the other imports.
+- Confirm that Solidity highlighting works inside of markdown files like so:
+
+```solidity
+import "./404-non-existant.sol";
+
+contract Greeter {
+    function greet() public pure returns (string memory) {
+        return "Hello, World!";
+    }
+}
+```
