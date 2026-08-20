@@ -10,6 +10,8 @@ Release prep for *Hardhat for Visual Studio Code* involves running through manua
 
 ## Manual Test Run
 
+This project uses **Hardhat 3**, which requires Node.js v22.13.0 or later.
+
 Install the Release Candidate vsix file into your local instance of vscode on one of the test platforms (i.e. windows). Open this repo within vscode and install the dependencies:
 
 ```shell
@@ -20,6 +22,12 @@ Confirm that the contracts build cleanly at the command line:
 
 ```shell
 npx hardhat compile
+```
+
+Confirm that the TypeScript tests still pass:
+
+```shell
+npx hardhat test
 ```
 
 Any new features or bugs that constitute the release should be checked.

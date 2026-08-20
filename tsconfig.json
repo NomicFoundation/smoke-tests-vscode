@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
+    "lib": ["es2023"],
+    "module": "node20",
+    "target": "es2023",
     "strict": true,
-    "esModuleInterop": true,
+    "skipLibCheck": true,
     "outDir": "dist",
-    "declaration": true
-  },
-  "include": ["./scripts", "./test", "./typechain"],
-  "files": ["./hardhat.config.ts"]
+    "types": ["node", "mocha"],
+    "verbatimModuleSyntax": true
+  }
 }

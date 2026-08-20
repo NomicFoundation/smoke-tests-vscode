@@ -1,59 +1,58 @@
-import * as dotenv from "dotenv";
+import "dotenv/config";
 
-import { HardhatUserConfig, task } from "hardhat/config";
-import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
-import "@typechain/hardhat";
-import "hardhat-gas-reporter";
-import "solidity-coverage";
-import "hardhat-contract-sizer";
-
-dotenv.config();
+import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
+import { configVariable, defineConfig, task } from "hardhat/config";
 
 // This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
+// https://hardhat.org/docs/learn-more/writing-tasks
+const accountsTask = task("accounts", "Prints the list of accounts")
+  .setInlineAction(async (_taskArguments, hre) => {
+    const { ethers } = await hre.network.create();
 
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
+    for (const account of await ethers.getSigners()) {
+      console.log(account.address);
+    }
+  })
+  .build();
 
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
+// You need to export a config object to set up your project
+// Go to https://hardhat.org/docs/reference/configuration to learn more
 
-const config: HardhatUserConfig = {
+export default defineConfig({
+  plugins: [hardhatToolboxMochaEthersPlugin],
+  tasks: [accountsTask],
   solidity: {
-    compilers: [
-      {
-        version: "0.8.8",
+    profiles: {
+      default: {
+        compilers: [
+          {
+            version: "0.8.8",
+          },
+          {
+            version: "0.8.24",
+          },
+          {
+            version: "0.8.25",
+          },
+        ],
       },
-      {
-        version: "0.8.24",
-      },
-      {
-        version: "0.8.25",
-      },
-    ],
-  },
-  networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
   },
-  gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
+  networks: {
+    hardhatMainnet: {
+      type: "edr-simulated",
+      chainType: "l1",
+    },
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+      url: configVariable("SEPOLIA_URL"),
+      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+    },
   },
-  etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+  verify: {
+    etherscan: {
+      apiKey: configVariable("ETHERSCAN_API_KEY"),
+    },
   },
-  contractSizer: {
-    runOnCompile: true,
-  },
-};
-
-export default config;
+});

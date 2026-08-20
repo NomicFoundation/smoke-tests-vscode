@@ -1,11 +1,11 @@
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import { network } from "hardhat";
+
+const { ethers } = await network.create();
 
 describe("Greeter", function () {
   it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+    const greeter = await ethers.deployContract("Greeter", ["Hello, world!"]);
 
     expect(await greeter.greet()).to.equal("Hello, world!");
 
