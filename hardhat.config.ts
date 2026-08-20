@@ -32,7 +32,7 @@ export default defineConfig({
             version: "0.8.24",
           },
           {
-            version: "0.8.25",
+            version: "0.8.30",
           },
         ],
       },

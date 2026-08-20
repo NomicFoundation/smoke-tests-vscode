@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.8.8;
+pragma solidity ^0.8.30;
 
 type CustomType is uint256;
 
